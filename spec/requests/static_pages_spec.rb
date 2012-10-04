@@ -2,51 +2,29 @@ require 'spec_helper'
 
 describe "Static pages" do
 
+  subject { page }
+
   describe "Home page" do
+    before { visit root_path } 
 
-    it "should have the h1 'Flavorites'" do
-      visit root_path
-      page.should have_selector('h1', :text => 'Flavorites')
-    end
-
-    it "should have the title 'Flavorites'" do
-      visit root_path
-      page.should have_selector('title', :text => "Flavorites App")
-    end
-
-    it "should not have a custom page title" do
-      visit root_path
-      page.should_not have_selector('title', text: '| Home')
-    end
+    it { should have_selector('h1', text: 'Flavorites') }
+    it { should have_selector('title', text: full_title('')) }
+    it { should_not have_selector 'title', text: '| Home' }
   end
-
 
   describe "About page" do
+    before { visit about_path }
 
-    it "should have the h1 'About'" do
-      visit about_path
-      page.should have_selector('h1', :text => 'About Us')
-    end
+    it { should have_selector('h1', text: 'About Us') }
+    it { should have_selector('title', text: full_title('About Us')) }
 
-    it "should have the title 'About Us'" do
-      visit about_path
-      page.should have_selector('title',
-                    :text => "Flavorites App | About Us")
-    end
   end
-
+  
   describe "Contact page" do
+    before { visit contact_path }
 
-    it "should have the h1 'Contact'" do
-      visit contact_path
-      page.should have_selector('h1', :text => 'Contact')
-    end
-
-    it "should have the title 'Contact'" do
-      visit contact_path
-      page.should have_selector('title',
-                    :text => "Flavorites App | Contact")
-    end
+    it { should have_selector('h1', text: 'Contact') }
+    it { should have_selector('title', text: full_title('Contact')) }
   end
-end
 
+end
