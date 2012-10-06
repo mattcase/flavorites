@@ -24,7 +24,10 @@ describe BookmarksController do
   # Bookmark. As you add validations to Bookmark, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    {}
+    {
+      :name => "Test Bookmark",
+      :url => "www.sample.com"
+    }
   end
 
   # This should return the minimal set of values that should be in the session
@@ -37,6 +40,7 @@ describe BookmarksController do
   describe "GET index" do
     it "assigns all bookmarks as @bookmarks" do
       bookmark = Bookmark.create! valid_attributes
+      #bookmark = FactoryGirl.create(:bookmark)
       get :index, {}, valid_session
       assigns(:bookmarks).should eq([bookmark])
     end
